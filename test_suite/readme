@@ -1,0 +1,40 @@
+This folder will contain a Automated User Acceptence Test suite for Limfinity. The suite run in a jruby enviroment with selenium-webdriver, Sikuli, nokogiri and cucumber. 
+
+The tests can be run based on keywords or all at once.
+
+Test results are available as HTML or JSON and can include screenshots and/or recorded video of each test.
+
+Example tests written in plain english using Gherkin:
+
+Feature: Testing some basic Limfinity functions
+Description: This is a proof of concept showing that end user tests can be fully automated with image capture and plain language
+
+	Scenario: Add freezer
+	Scenario Background: Simple navigation example showing browser manipulation in a biobank implementation
+		When I open a new browser window
+		Then I navigate to "http://biobanx.ruro.com"
+		And I login with the username "adam" and password "password321"
+		Then I check for the welcome screen
+		And I take a screenshot and name it "loggedin"
+		Then I click the quicklink "Add New CTU"
+		And I wait for the "Add Freezer" dialog
+		Then I enter the name "-80c Freezer"
+		And I click OK and take a screenshot and name it "newfreezer"
+                Then I verify a new tab is open named "-80c Freezer"
+		Then I logout 
+		And close browser
+	
+	@limfinity	@login
+	Scenario: Limfinity Change Password
+	Scenario Description: In this scenario we are using the Sikuli java library to click the action button
+		Given I open a new browser window
+		And I navigate to "http://biobanx.ruro.com"
+		And I login with the username "adam" and password "password321"
+		Then I navigate to "Settings and Preferences"
+		Then I click "Users"
+		And I change password for "adam" to "newpassword123"
+		And I take a screenshot and name it "changedpassword"
+		Then I logout
+		And I login with the username "adam" and password "newpassword123"
+		Then I logout
+		And close browser
