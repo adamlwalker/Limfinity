@@ -26,7 +26,7 @@ Description: This is a proof of concept showing that end user tests can be fully
 	
 	@limfinity	@login
 	Scenario: Limfinity Change Password
-	Scenario Description: In this scenario we are using the Sikuli java library to click the action button
+	Scenario Description: In this scenario we are using the Sikuli java library to change a user password 
 		Given I open a new browser window
 		And I navigate to "http://biobanx.ruro.com"
 		And I login with the username "adam" and password "password321"
@@ -38,3 +38,15 @@ Description: This is a proof of concept showing that end user tests can be fully
 		And I login with the username "adam" and password "newpassword123"
 		Then I logout
 		And close browser
+
+-------------
+
+I plan on adding instructions for adding workflow and tool validations. For example, if you had a run script tool that calculated the hamming distance of 2 strands of DNA and submitted the result to a "Hamming Distance" UDF:
+
+		Given I am viewing subject "12345"
+		And subject "12345" is in the "enter results" state
+		When I click "Calculate Hamming"
+                And enter "GAGCCTACTAACGGGAT" in field1
+                And enter "CATCGTAATGACGGCCT" in field2
+                Then I click "OK"
+                And the "Hamming Distance" UDF should contain "7" 
